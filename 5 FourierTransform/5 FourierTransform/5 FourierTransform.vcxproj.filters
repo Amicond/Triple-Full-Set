@@ -42,13 +42,13 @@
     <ClInclude Include="..\..\SharedFiles\fileNamePrinter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="fourierOperatorsStorage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\SharedFiles\LadderOperator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SharedFiles\Term.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SharedFiles\matrixNodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,13 +71,13 @@
     <ClCompile Include="..\..\SharedFiles\fileNamePrinter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fourierOperatorsStorage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\SharedFiles\LadderOperator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SharedFiles\Term.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SharedFiles\matrixNodes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,6 +2,8 @@
 #pragma once
 #include <fstream>
 #include <sstream>
+#include <vector>
+
 #include "globalConsts.h"
 
 class configReader

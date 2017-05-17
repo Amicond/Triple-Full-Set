@@ -115,7 +115,7 @@ int Term::getOperatorAmount()
 {
 	return operators.size();
 }
-LadderOperator Term::getLadderOperator(int num)
+LadderOperator Term::getLadderOperator(int num)const
 {
 	if (num >= 0 && num < operators.size())
 		return operators[num];

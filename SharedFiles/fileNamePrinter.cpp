@@ -12,6 +12,15 @@ std::string fileNamePrinter::getPathToGeneralRoutesInfo(int currentOrder, std::s
 	return ostr.str();
 }
 
+
+//after srtage 2
+std::string fileNamePrinter::getPathToResMatrixFiles(std::string routeType,int currentOrder, int currenSubOrder, int routeNum)
+{
+	std::ostringstream ostr;
+	ostr << DirForResultsFromStage2 << "reults_" << routeType << Delimiter << currentOrder << "." << currenSubOrder << Delimiter << currentOrder << "_" << currenSubOrder << "_" << routeNum << "_res_" << routeType << ".txt";
+	return ostr.str();
+}
+
 std::string fileNamePrinter::getPathToResOfSystemSolving(std::string curJ2Point, int curOrder,int curSuborder,int curRouteNum, std::string typeName)
 {
 	std::ostringstream ostr;

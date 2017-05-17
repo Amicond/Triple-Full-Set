@@ -6,9 +6,9 @@
 class bilinearFourierLadderOperators
 {
 public:
-	std::vector<char> types_; //a,b,c or d type
-	std::vector<char> names_; //plus or minus
-	std::vector<std::pair<int,int>> nodes_; //to calc shift
+	std::vector<char> bosonTypes_; //a,b,c or d type
+	std::vector<char> operatorTypes_; //plus or minus
+	std::vector<std::pair<int,int>> shifts_; //to calc shift
 	double coefficient_;
 	int order_;
 	
@@ -18,11 +18,9 @@ public:
 
 	bool operator<(const bilinearFourierLadderOperators second) const;
 	
-	void convertTerm(Term &curTerm);
+	bool convertTerm(Term &curTerm);
 
-	void sort
-
-	void printAterm(std::ofstream &F, int **m, int size, bool if_print_coeff = true)const;
+	void printAterm(std::ofstream &F, bool if_print_coeff = true)const;
 
 	void clear();
 

@@ -10,8 +10,10 @@ public:
 	//output name on stage 1.1
 	static std::string getPathToGeneralRoutesInfo(int currentOrder, std::string typeName);
 	//output name on stage 2
+	static std::string getPathToResMatrixFiles(std::string routeType, int currentOrder, int currenSubOrder, int routeNum);
 	
 	//output name on stage 3.5, after Mathematica
+
 	//input for stage 4
 	static std::string getPathToResOfSystemSolving(std::string curJ2Point, int curOrder, int curSuborder, int curRouteNum, std::string typeName);
 

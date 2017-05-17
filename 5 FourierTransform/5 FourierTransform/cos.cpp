@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "cos.h"
 
-int ** Cos::m = NULL;
+int  ** Cos::m = NULL;
 int Cos::size = -1;
 std::vector<std::pair<int, int>> Cos::coords;
 
@@ -32,7 +32,8 @@ void Cos::findArbitraryCos(int n1, int n2, int &da, int &db)
 		db = -db;
 	}
 }
-void Cos::set(int **M, int  Size){
+
+void Cos::set(int  **M, int  Size){
 	Cos::m = M;
 	Cos::size = Size;
 	for (int i = 0; i < Cos::size*Cos::size; i++) {
@@ -45,6 +46,7 @@ void Cos::set(int **M, int  Size){
 		}
 	}
 }
+
 bool Cos::operator ==(Cos c2)
 {
 	if (ka.size() != c2.ka.size())

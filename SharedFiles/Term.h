@@ -16,7 +16,7 @@ public:
 	int getTermLength();
 
 	int getOperatorAmount();
-	LadderOperator getLadderOperator(int num);
+	LadderOperator getLadderOperator(int num)const;
 	
 	bool chekIsZeroNode();
 	

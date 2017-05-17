@@ -10,7 +10,7 @@ public:
 	std::vector<int> ka, kb;
 	static std::vector<std::pair<int, int>> coords;
 	bool operator ==(Cos c2);
-	static void set(int **M, int  Size);
+	static void set(int  **M, int  Size);
 	static void findCos( int n, int &da, int &db);
 	static void findArbitraryCos(int n1, int n2,int &da, int &db);
 	static int getSign(int num);
