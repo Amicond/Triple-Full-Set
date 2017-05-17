@@ -1,0 +1,5 @@
+﻿  3 Define System.cpp
+d:\andrew\practice\!!!_4 triplet square set\3 define system\3 define system\3 define system.cpp(99): warning C4101: 'cur_amount_nl': unreferenced local variable
+d:\andrew\practice\!!!_4 triplet square set\3 define system\3 define system\3 define system.cpp(99): warning C4101: 'size': unreferenced local variable
+d:\andrew\practice\!!!_4 triplet square set\3 define system\3 define system\3 define system.cpp(99): warning C4101: 'cur_amount': unreferenced local variable
+  3 Define System.vcxproj -> D:\Andrew\Practice\!!!_4 Triplet Square set\3 Define System\Debug\3 Define System.exe

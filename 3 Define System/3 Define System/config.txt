@@ -1,0 +1,14 @@
+Input path
+d:\Andrew\Practice\!!!_4 Triplet Square set\2 MainConveyor\2 MainConveyor\
+points
+1
+Order
+4
+Mode (1-generate all orders from 2 to last, anything else - generate only last)
+1
+Order Loops Not_Loops Not_Single
+1	1	0	3
+2	3	0	10
+3	1	15	57
+4	18	111	352
+5	91	811	2811

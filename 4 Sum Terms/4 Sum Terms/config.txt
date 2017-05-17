@@ -1,0 +1,12 @@
+Input path
+d:\results\SquareTriplets\
+Order
+4
+Creation/anihilation operators in output term
+2
+Order	0FreeNodes	1FreeNodes	2FreeNodes
+1		1			0			3
+2		3			0			10
+3		1			15			57
+4		18			111			352
+5		91			811			2811
