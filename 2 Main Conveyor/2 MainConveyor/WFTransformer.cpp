@@ -11,6 +11,14 @@ WFTransformer::~WFTransformer()
 {
 }
 
+void WFTransformer::clear()
+{
+	for (int i = 0; i < N; i++)
+	{
+		interactions[i].clear();
+	}
+}
+
 
 void WFTransformer::returnV(int edgeNum, int nodeNumsOfEdges[][2], std::vector<edge> edges)
 {
@@ -165,7 +173,10 @@ void WFTransformer::act(WaveFunction& inWF, WaveFunction& outWF, int interNumber
 
 {
 	State currentInputState;//const state from 
-	State tempst(inWF.getNodesAmount()); //intermediate state
+	//temp
+	int nodesAmout = inWF.getNodesAmount();
+	//temp end
+	State tempst(nodesAmout); //intermediate state
 	
 	std::vector<std::pair<int, double>> currentNonZeroTransitions;//non-zero matrix elements of spin matrixes
 	std::vector<State> tempWF, tempWF2; //intermediate wavfunctions
@@ -276,7 +287,7 @@ void WFTransformer::act(WaveFunction& inWF, WaveFunction& outWF, int interNumber
 		}
 	}
 	//Сортируем и собираем выходной вектор
-	outWF.clear();
+	outWF.clear(inWF.getNodesAmount());
 	if (tempWF2.size())
 		outWF.collect(tempWF2);
 }
@@ -347,7 +358,14 @@ void WFTransformer::actInside(WaveFunction& inWF, WaveFunction& outWF, int plaqu
 			
 		}
 	}
-
+	///todo
+	//TODO
+	//check it
+	//check it
+	//check it
+	//check it
+	//check it
+	outWF.clear(inWF.getNodesAmount());
 	if (tempWF.size())
 		outWF.collect(tempWF);
 }

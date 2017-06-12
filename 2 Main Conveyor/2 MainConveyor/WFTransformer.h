@@ -15,6 +15,7 @@ public:
 	WFTransformer();
 	~WFTransformer();
 	
+	void clear();
 	void returnV(int edgeNum, int nodeNumsOfEdges[][2], std::vector<edge> edges);
 	void setInteractions(int nodeNumsOfEdges[][2], std::vector<edge> edges);
 	void actCopy(WaveFunction& inWF, WaveFunction& outWF);

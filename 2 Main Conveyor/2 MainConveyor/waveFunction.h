@@ -24,7 +24,7 @@ public:
 	void addEigenState(State newEigenstate);
 
 	int findLastGroup(int startNumber);
-	void clear();
+	void clear(int nodeNumVal);
 	WaveFunction();
 	~WaveFunction();
 };

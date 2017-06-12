@@ -5,10 +5,20 @@
 class fileNamePrinter
 {
 public:
+	//general input 
+	static std::string fileNamePrinter::getPathToConfigFile();
+	static std::string fileNamePrinter::gePathToMatrixes(std::string matrixPrefix, int vertexNum);
+	static std::string fileNamePrinter::gePathToInsideMatrix();
+	static std::string fileNamePrinter::gePathToEnergies();
+	static std::string fileNamePrinter::getPathToPerturbationTerms(int order);
+
 	//output name on stage 0
+	static std::string fileNamePrinter::getPathToSpinsOrder(int order);
+	
 	//output name on stage 1
 	//output name on stage 1.1
-	static std::string getPathToGeneralRoutesInfo(int currentOrder, std::string typeName);
+	static std::string fileNamePrinter::getPathToGeneralRoutesInfo(int currentOrder, std::string typeName);
+	static std::string fileNamePrinter::getPathToRouteFile(int order, int subOrder, int routeNum, std::string routeType);
 	//output name on stage 2
 	static std::string getPathToResMatrixFiles(std::string routeType, int currentOrder, int currenSubOrder, int routeNum);
 	

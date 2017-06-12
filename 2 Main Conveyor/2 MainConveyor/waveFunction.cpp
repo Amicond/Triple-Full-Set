@@ -119,9 +119,9 @@ void WaveFunction::addEigenState(State newEigenstate)
 		eigenStates.push_back(newEigenstate);
 }
 
-void WaveFunction::clear()
+void WaveFunction::clear(int nodeNumVal)
 {
-	nodesAmount = -1;
+	nodesAmount = nodeNumVal;
 	eigenStates.clear();
 	sorted = false;
 }

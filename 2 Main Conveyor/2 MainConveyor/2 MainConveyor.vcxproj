@@ -134,6 +134,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\Andrew\Practice\!!!_4 Triplet Square set\SharedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\SharedFiles\configReader.h" />
     <ClInclude Include="..\..\SharedFiles\fileNamePrinter.h" />
+    <ClInclude Include="..\..\SharedFiles\globalConsts.h" />
     <ClInclude Include="Consts.h" />
     <ClInclude Include="MatrixOfResults.h" />
     <ClInclude Include="JFactors.h" />

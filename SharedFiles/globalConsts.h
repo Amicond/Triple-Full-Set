@@ -13,10 +13,24 @@ const int minSubOrder[RouteTypeAmount] = { 1,3,1 };
 //delimeter
 const std::string Delimiter = "\\";
 
+
 //directories for result files from different stages
-const std::string DirForResultsFromStage1  = "";
-const std::string DirForResultsFromStage11 = "d:\\Andrew\\Practice\\!!!_4 Triplet Square set\\Results\\Stage1.1\\";
-const std::string DirForResultsFromStage2  = "d:\\Andrew\\Practice\\!!!_4 Triplet Square set\\Results\\Stage2\\";
-const std::string DirForResultsFromStage35 = "d:\\Andrew\\Practice\\!!!_4 Triplet Square set\\Results\\Stage3.5\\";
-const std::string DirForResultsFromStage4  = "d:\\Andrew\\Practice\\!!!_4 Triplet Square set\\Results\\Stage4\\";
-const std::string DirForResultsFromStage5  = "d:\\Andrew\\Practice\\!!!_4 Triplet Square set\\Results\\Stage5\\";
+const std::string ProjectFolder="d:\\Andrew\\Practice\\!!!_4 Triplet Square set";
+const std::string ResultsFolder = ProjectFolder+ Delimiter +"Results"+ Delimiter;
+const std::string InputDataFolder = ProjectFolder + Delimiter + "InputData" + Delimiter;
+
+
+//full paths
+//initial input data dirs
+const std::string ConfigFilePath = InputDataFolder + "config.txt";
+const std::string DirForMatrixInput = InputDataFolder + "matrixes" + Delimiter;
+const std::string MatrixVersionPrefix = "b3_";
+const std::string DirForPerturbationSeries = InputDataFolder + "perturbationTerms" + Delimiter;
+//paths for results dirs
+const std::string DirForResultsFromStage0 = ResultsFolder + "Stage0" + Delimiter;
+const std::string DirForResultsFromStage1  = ResultsFolder + "Stage1" + Delimiter;
+const std::string DirForResultsFromStage11 = ResultsFolder + "Stage1.1" + Delimiter;
+const std::string DirForResultsFromStage2 = ResultsFolder + "Stage2" + Delimiter;
+const std::string DirForResultsFromStage35 = ResultsFolder + "Stage3.5" + Delimiter;
+const std::string DirForResultsFromStage4 = ResultsFolder + "Stage4" + Delimiter;
+const std::string DirForResultsFromStage5 = ResultsFolder + "Stage5" + Delimiter;

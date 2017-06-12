@@ -5,6 +5,60 @@
 #include "fileNamePrinter.h"
 
 
+
+//input data section
+std::string fileNamePrinter::getPathToConfigFile()
+{
+	std::ostringstream ostr;
+	ostr << ConfigFilePath;
+	return ostr.str();
+}
+
+std::string fileNamePrinter::gePathToMatrixes(std::string matrixPrefix,int vertexNum)
+{
+	std::ostringstream ostr;
+	ostr << DirForMatrixInput << MatrixVersionPrefix << matrixPrefix << vertexNum<< ".txt";
+	return ostr.str();
+}
+std::string fileNamePrinter::gePathToInsideMatrix()
+{
+	std::ostringstream ostr;
+	ostr << DirForMatrixInput << MatrixVersionPrefix << "inside_matr.txt";
+	return ostr.str();
+}
+
+std::string fileNamePrinter::gePathToEnergies()
+{
+	std::ostringstream ostr;
+	ostr << DirForMatrixInput << MatrixVersionPrefix << "energy.txt";
+	return ostr.str();
+}
+
+std::string fileNamePrinter::getPathToPerturbationTerms(int order)
+{
+	std::ostringstream ostr;
+	ostr << DirForPerturbationSeries << order << "order.txt";
+	return ostr.str();
+}
+
+//stage 0 output
+//stage 2 input
+std::string fileNamePrinter::getPathToSpinsOrder(int order)
+{
+	std::ostringstream ostr;
+	ostr << DirForResultsFromStage0 << order << "spins_order" << ".txt";
+	return ostr.str();
+}
+
+//output for stage 1.1
+//input for stage 2
+std::string fileNamePrinter::getPathToRouteFile(int order, int subOrder, int routeNum, std::string routeType)
+{
+	std::ostringstream ostr;
+	ostr << DirForResultsFromStage11 << order << "_" << routeType << Delimiter<< order<<"_"<<subOrder<<"_"<<routeNum<< "_routeNum_" << routeType << ".txt";
+	return ostr.str();
+}
+
 std::string fileNamePrinter::getPathToGeneralRoutesInfo(int currentOrder, std::string typeName)
 {
 	std::ostringstream ostr;
@@ -17,7 +71,7 @@ std::string fileNamePrinter::getPathToGeneralRoutesInfo(int currentOrder, std::s
 std::string fileNamePrinter::getPathToResMatrixFiles(std::string routeType,int currentOrder, int currenSubOrder, int routeNum)
 {
 	std::ostringstream ostr;
-	ostr << DirForResultsFromStage2 << "reults_" << routeType << Delimiter << currentOrder << "." << currenSubOrder << Delimiter << currentOrder << "_" << currenSubOrder << "_" << routeNum << "_res_" << routeType << ".txt";
+	ostr << DirForResultsFromStage2 << "results_" << routeType << Delimiter << currentOrder << "." << currenSubOrder << Delimiter << currentOrder << "_" << currenSubOrder << "_" << routeNum << "_res_" << routeType << ".txt";
 	return ostr.str();
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Consts.h"
+#include "fileNamePrinter.h"
 
 class Operators
 {

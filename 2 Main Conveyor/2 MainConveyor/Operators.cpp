@@ -20,9 +20,10 @@ void Operators::readMatrixAndEnergie()
 	{
 		for (int i = 0; i < SpinsInPlaquet; i++)
 		{
-			std::ostringstream tmp;
-			tmp << (i + 1);
-			s = InputPrefixForMatrixes + matrixNamePrefixes[prefixNum] + tmp.str() + FileType;
+			//std::ostringstream tmp;
+			//tmp << (i + 1);
+			////s = fileNamePrinter::gePathToMatrixes() +"b3_"+ matrixNamePrefixes[prefixNum] + tmp.str() + FileType;
+			s = fileNamePrinter::gePathToMatrixes(matrixNamePrefixes[prefixNum], i + 1);
 			in.open(s.c_str(), std::ios::in);
 			for (int j = 0; j < DiffStates; j++)
 			{
@@ -37,7 +38,7 @@ void Operators::readMatrixAndEnergie()
 		}
 	}
 
-	in.open((InputPrefixForMatrixes + "inside_matr.txt").c_str(), std::ios::in);
+	in.open(fileNamePrinter::gePathToInsideMatrix().c_str(), std::ios::in);
 	for (int i = 0; i<DiffStates; i++)
 		for (int j = 0; j<DiffStates; j++)
 		{
@@ -47,7 +48,7 @@ void Operators::readMatrixAndEnergie()
 		}
 	in.close();
 
-	in.open((InputPrefixForMatrixes + "energy.txt").c_str(), std::ios::in);
+	in.open(fileNamePrinter::gePathToEnergies().c_str(), std::ios::in);
 	for (int i = 0; i<DiffStates; i++)
 	{
 		in >> Energie[i];
