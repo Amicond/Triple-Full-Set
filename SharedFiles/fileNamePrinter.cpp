@@ -50,6 +50,14 @@ std::string fileNamePrinter::getPathToSpinsOrder(int order)
 	return ostr.str();
 }
 
+//output for stage 1
+//input for stage 1.1
+std::string fileNamePrinter::getPathToBasicGeneralRoutesInfo(int currentOrder, std::string typeName)
+{
+	std::ostringstream ostr;
+	ostr << DirForResultsFromStage1 << currentOrder << "_uniq_" << typeName << ".txt";
+	return ostr.str();
+}
 //output for stage 1.1
 //input for stage 2
 std::string fileNamePrinter::getPathToRouteFile(int order, int subOrder, int routeNum, std::string routeType)

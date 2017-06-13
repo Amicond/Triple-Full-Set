@@ -2,6 +2,7 @@
 //
 
 #include "stdafx.h"
+#include "fileNamePrinter.h"
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -9,7 +10,7 @@
 #include <algorithm>
 #include <sstream>
 using namespace std;
-//const int Nmax=10;
+
 
 const string res_dir = "Results";
 const string inp_dir = "Input";
@@ -17,6 +18,7 @@ const string delim = "\\";
 const string type1 = "0";
 const string type2 = "1";
 const string type3 = "2";
+
 struct step
 {
 	step(int x=0, int y=0)
@@ -743,6 +745,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	config >> NNN >> subOrder >> routeType >> format;
 	int d = size(NNN);
 
+
 	matr = new int*[d];
 	for (int i = 0; i < d; i++)
 	{
@@ -751,7 +754,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	fillMatrix(NNN, matr);
 
 	ostringstream ostr;
-
+	 
 	string type;
 	switch (routeType)
 	{

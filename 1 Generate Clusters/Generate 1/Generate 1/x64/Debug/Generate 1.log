@@ -1,7 +1,7 @@
-﻿  Generate 1.cpp
-d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\generate 1.cpp(946): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\generate 1.cpp(1022): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
-d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\generate 1.cpp(996): warning C4101: 'check': unreferenced local variable
-d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\generate 1.cpp(1033): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\generate 1.cpp(1166): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+﻿  Route.cpp
+d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\route.cpp(93): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\route.cpp(107): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\route.cpp(156): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\route.cpp(129): warning C4101: 'check': unreferenced local variable
+d:\andrew\practice\!!!_4 triplet square set\1 generate clusters\generate 1\generate 1\route.cpp(217): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   Generate 1.vcxproj -> D:\Andrew\Practice\!!!_4 Triplet Square set\1 Generate Clusters\Generate 1\x64\Debug\Generate 1.exe

@@ -16,6 +16,7 @@ public:
 	static std::string fileNamePrinter::getPathToSpinsOrder(int order);
 	
 	//output name on stage 1
+	static std::string fileNamePrinter::getPathToBasicGeneralRoutesInfo(int currentOrder, std::string typeName);
 	//output name on stage 1.1
 	static std::string fileNamePrinter::getPathToGeneralRoutesInfo(int currentOrder, std::string typeName);
 	static std::string fileNamePrinter::getPathToRouteFile(int order, int subOrder, int routeNum, std::string routeType);
