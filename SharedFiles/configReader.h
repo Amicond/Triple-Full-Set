@@ -1,5 +1,7 @@
 //iClass to read params from config files
-#pragma once
+#ifndef CONFIGREADER_H
+#define CONFIGREADER_H
+
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -28,4 +30,6 @@ public:
 
 	void readRouteAmounts(int orderAmounts[][RouteTypeAmount],int minOrder=1,int maxOrder=1);
 };
+
+#endif // !CONFIGREADER_H
 

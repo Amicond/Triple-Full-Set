@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "matrixNodes.h"
 
-
 matrixNodes::matrixNodes()
 {
 }
-
 
 matrixNodes::~matrixNodes()
 {

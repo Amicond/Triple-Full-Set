@@ -1,6 +1,9 @@
-#pragma once
-//#include "stdafx.h"
+#ifndef MATRIXNODES_H 
+#define MATRIXNODES_H 
 #include <string>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
 class matrixNodes
 {
 	int **matrix;
@@ -17,3 +20,4 @@ public:
 	int  ** getMatrix();
 };
 
+#endif // !MATRIXNODES_H 

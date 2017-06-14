@@ -1,9 +1,9 @@
 //global consts identical to the whole pipeline
-#pragma once
+#ifndef GLOBALCONSTS_H
+#define GLOBALCONSTS_H
+
 const int RouteTypeAmount = 3;
 const int MaxOrder = 5;
-
-
 
 const std::string TypeStr[RouteTypeAmount] = { "0","1","2" };
 const int minSubOrder[RouteTypeAmount] = { 1,3,1 };
@@ -34,3 +34,5 @@ const std::string DirForResultsFromStage2 = ResultsFolder + "Stage2" + Delimiter
 const std::string DirForResultsFromStage35 = ResultsFolder + "Stage3.5" + Delimiter;
 const std::string DirForResultsFromStage4 = ResultsFolder + "Stage4" + Delimiter;
 const std::string DirForResultsFromStage5 = ResultsFolder + "Stage5" + Delimiter;
+
+#endif // !GLOBALCONSTS_H
