@@ -1,5 +1,3 @@
-Input path
-d:\Andrew\Practice\!!!_4 Triplet Square set\2 MainConveyor\2 MainConveyor\
 points
 1
 Order

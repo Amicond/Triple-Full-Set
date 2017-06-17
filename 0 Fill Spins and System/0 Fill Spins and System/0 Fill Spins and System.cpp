@@ -10,7 +10,7 @@
 #include<set>
 #include<vector>
 #include<algorithm>
-
+#include "fileNamePrinter.h"
 
 const int maxSpins = 10;
 
@@ -39,7 +39,7 @@ public:
 		out << "};\n";
 	}
 };
-void setSpins(int spins[], int Nconf, int size)
+void setTripletSpins(int spins[], int Nconf, int size)
 {
 	int tempSpins[maxSpins];
 	int singletFactor = (int)pow(2, size - 1);
@@ -77,7 +77,7 @@ void setMask(int mask[], int Nconf, int N)//преобразует число в двоичную маску
 }
 
 
-std::string ret(int i, int j,int num)
+std::string retTriplet(int i, int j,int num)
 {
 	char c = '0';
 	std::ostringstream s;
@@ -163,13 +163,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	if (mode == 1)
 	{
-		std::ostringstream fname;
-		fname << power << "spins_order.txt";
-		std::ofstream outspins(fname.str(), std::ios::out);
+		std::ofstream outspins(fileNamePrinter::getPathToSpinsOrder(power), std::ios::out);
 		size = 3 * power * (int)pow(2, power - 1);
 		for (int j = 0; j < size; j++)
 		{
-			setSpins(spins, j, power);
+			setTripletSpins(spins, j, power);
 			for (int i = 0; i < power; i++)
 			{
 				outspins << spins[i] << " ";
@@ -183,13 +181,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	if(mode==2)
 	{
-		std::ostringstream fname;
-		fname << power << "var_sys.txt";
-		std::ofstream out(fname.str(), std::ios::out);
+		std::ofstream out(fileNamePrinter::getPathToSystems(power), std::ios::out);
 		for (int curP = 1; curP <= power; curP++)
 		{
 			Names curOrderNames;
-			//curOrderNames.add("CCCCC");
 			size = 3 * curP*(int)pow((double)2, (int)curP - 1);
 
 			for (int j = 0; j < power; j++)
@@ -206,12 +201,12 @@ int _tmain(int argc, _TCHAR* argv[])
 			out << "\nSys" << curP << "={";
 			for (int i = 0; i < size; i++)
 			{
-				setSpins(spins, i, curP);
+				setTripletSpins(spins, i, curP);
 				out << "{";
 				std::cout << i <<"\n";
 				for (int j = 0; j < size; j++)
 				{
-					setSpins(spinsOut, j, curP);
+					setTripletSpins(spinsOut, j, curP);
 					s.clear();
 					
 					for (int tt = 0; tt < curP; tt++)
@@ -247,7 +242,7 @@ int _tmain(int argc, _TCHAR* argv[])
 							}
 							else //Вставляем операторы для данной пары спинов если нужно 
 							{
-								temp2 = ret(spins[l], spinsOut[l], l);
+								temp2 = retTriplet(spins[l], spinsOut[l], l);
 								if (temp2.compare("1") != 0)
 									temp += temp2;
 							}
@@ -258,17 +253,9 @@ int _tmain(int argc, _TCHAR* argv[])
 							if (temp.length() > 0&&temp.find_first_of("bcd") != std::string::npos)
 							{
 								names.insert(temp);
-								/*if (s.length() == 0)
-									s = temp;
-								else
-									s = s + "+" + temp;*/
 							}
 						}
 					}
-					/*std::string shortestName=names[0];
-					for (auto& curs : names)
-						if (curs.length() < shortestName.length())
-							shortestName = curs;*/
 					int curn = 0;
 					for (auto& elem:names)
 					{ 

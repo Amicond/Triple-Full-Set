@@ -49,6 +49,13 @@ std::string fileNamePrinter::getPathToSpinsOrder(int order)
 	return ostr.str();
 }
 
+std::string fileNamePrinter::getPathToSystems(int order)
+{
+	std::ostringstream ostr;
+	ostr << DirForResultsFromStage0 <<"Sys"<<Delimiter<< order << "var_sys" << ".txt";
+	return ostr.str();
+}
+
 //output for stage 1
 //input for stage 1.1
 std::string fileNamePrinter::getPathToBasicGeneralRoutesInfo(int currentOrder, std::string typeName)
@@ -74,18 +81,47 @@ std::string fileNamePrinter::getPathToGeneralRoutesInfo(int currentOrder, std::s
 }
 
 
-//after srtage 2
+//after stage 2
 std::string fileNamePrinter::getPathToResMatrixFiles(std::string routeType,int currentOrder, int currenSubOrder, int routeNum)
 {
 	std::ostringstream ostr;
 	ostr << DirForResultsFromStage2 << "results_" << routeType << Delimiter << currentOrder << "." << currenSubOrder << Delimiter << currentOrder << "_" << currenSubOrder << "_" << routeNum << "_res_" << routeType << ".txt";
 	return ostr.str();
 }
+//output stage 3
+std::string fileNamePrinter::getFileNameOfMathematicaFile(int order,std::string pointName,int fileNum)
+{
+	std::ostringstream ostr;
+	ostr << "_" << order << "_results_J2=" << pointName << "(" << fileNum << ").txt";
+	return ostr.str();
+}
+std::string fileNamePrinter::getPathToMathematicaFiles(int order, std::string pointName, int fileNum)
+{
+	std::ostringstream ostr;
+	ostr << DirForResultsFromStage3 <<DirForSystemsOnStage3<<Delimiter<< pointName << Delimiter << getFileNameOfMathematicaFile(order,pointName,fileNum);
+	return ostr.str();
+}
 
+std::string fileNamePrinter::getPathToMainMathematicaFiles(std::string pointName,int order)
+{
+	std::ostringstream ostr;
+	ostr << DirForResultsFromStage3 << DirForSolutionsOnStage3 << Delimiter << pointName << Delimiter << order << "_" << pointName << "general_math.txt";
+	return ostr.str();
+}
+
+std::string fileNamePrinter::getPathToMathematicaSolutionsFiles(std::string pointName,std::string routeType,int order,int subOrder,int routeNum)
+{
+	//relatve output
+	std::ostringstream ostr;
+	ostr << ".." << MathDelimiter <<".."<< MathDelimiter<< DirForSolutionsOnStage3 <<MathDelimiter<< pointName << MathDelimiter << "res"<<order << "_" << pointName << "general_math.txt";
+	return ostr.str();
+}
+
+
+//output for systemSolving
 std::string fileNamePrinter::getPathToResOfSystemSolving(std::string curJ2Point, int curOrder,int curSuborder,int curRouteNum, std::string typeName)
 {
 	std::ostringstream ostr;
-	//str << inputRoutesPath << curPoint << Delimiter << "res" << TypeStr[type] << "$" << order << "$" << subOrder << "$" << curRouteNum++ << "_" << curPoint << ".txt";
 	ostr << DirForResultsFromStage35 << curJ2Point << Delimiter << "res" << typeName << "$" << curOrder << "$" << curSuborder << "$" << curRouteNum << "_" << curJ2Point << ".txt";
 	return ostr.str();
 }

@@ -2,56 +2,55 @@
 //
 
 #include "stdafx.h"
+#include "fileNamePrinter.h"
+#include "configReader.h"
+#include "globalConsts.h"
 
+std::string getSystemNumber(int size)
+{
+	switch (size)
+	{
+	case 3:	  return "1";
+	case 12:  return "2";
+	case 36:  return "3";
+	case 96:  return "4";
+	case 240: return "5";
+	case 576: return "6";
+	}
+}
 
-
-const std::string sys = "sys";
-const std::string input = "input";
-const std::string res = "results";
-
-const std::string math_res = "results";
-const std::string delim = "\\";
-const std::string math_delim = "\\\\";
-std::string root_path;
-
-std::vector<std::string> my_points;
-const int J1 = 1;
-
-void define_term(std::ofstream &math_out, std::string &point, int type, int order, int subOrder, int &Total, std::ofstream &out, int term_amount[][3], int step)
+void define_term(std::ofstream &math_out, std::string &point, int type, int order, int subOrder, int &total, std::ofstream &out, int term_amount[][3], int step)
 {
 	std::ostringstream fname, tmpStr;
 	std::ifstream cur_f;
-	std::string MatrixStr, temp;
+	std::string MatrixStr, routeType;
 	int size;
 
 	for (int j = 1; j <= term_amount[subOrder][type]; j++)
 	{
 
-		Total++;
-		if (Total%step == 0)
+		total++;
+		if (total%step == 0)
 		{
 			out.close();
-			fname.str("");
-			fname << res << delim << point << delim << "!_" << order << "_results_J2=" << point << "(" << Total / step << ").txt";
 			//добавл€ем в авто файл
-			math_out << "nb1= NotebookOpen[StringJoin[{NotebookDirectory[], \"" << "!_" << order << "_results_J2=" << point << "(" << Total / step << ").txt" << "\"}]];\n";
+			math_out << "nb1= NotebookOpen[StringJoin[{NotebookDirectory[], \"" << fileNamePrinter::getFileNameOfMathematicaFile(subOrder, point, total / step) << "\"}]];\n";
 			math_out << "NotebookEvaluate[nb1];\n";
 			math_out << "NotebookClose[nb1];\n";
 			//конец добавки
 			out.open(fname.str(), std::ios::out);
 		}
 		
-		fname.str("");
-		fname << type;
-		temp = fname.str();
 		
-		fname.str("");
-		fname << root_path << "results_" << temp << delim << order << "." << subOrder << delim << order << "_" << subOrder << "_" << j << "_res_" << temp << ".txt";
-		cur_f.open(fname.str(), std::ios::in);
+		routeType = std::to_string(type);
+		
+		//fname.str("");
+		//fname << root_path << "results_" << temp << Delimiter << order << "." << subOrder << Delimiter << order << "_" << subOrder << "_" << j << "_res_" << temp << ".txt";
+		cur_f.open(fileNamePrinter::getPathToResMatrixFiles(routeType,order,subOrder,j), std::ios::in);
 		
 		cur_f >> size;
 		tmpStr.str("");
-		tmpStr << "res" << temp << "$" << order << "$" << subOrder << "$" << j;
+		tmpStr << "res" << routeType << "$" << order << "$" << subOrder << "$" << j;
 		out << tmpStr.str() << "=";
 		while (!cur_f.eof())
 		{
@@ -61,17 +60,9 @@ void define_term(std::ofstream &math_out, std::string &point, int type, int orde
 		}
 		out << ";\n";
 		out << "Eff" << tmpStr.str() << "=Expand[Chop[Solve[Sys";
-		switch (size)
-		{
-		case 3:	  temp = "1"; break;
-		case 12:  temp = "2"; break;
-		case 36:  temp = "3"; break;
-		case 96:  temp = "4"; break;
-		case 240: temp = "5"; break;
-		case 576: temp = "6"; break;
-		}
-		out << temp << "==" << tmpStr.str() << "/.{J1->1,J2->" << point << "},Var" << temp << "]]];\n";
-		out << "tt = OpenWrite[\"D:" << math_delim << math_res << math_delim << point << math_delim << tmpStr.str() << "_" << point << ".txt\"];\n";
+		
+		out << getSystemNumber(size) << "==" << tmpStr.str() << "/.{J1->"<<J1<<",J2->" << point << "},Var" << getSystemNumber(size) << "]]];\n";
+		out << "tt = OpenWrite[\""<<  fileNamePrinter::getPathToMathematicaSolutionsFiles(point,routeType,order,subOrder,j) << "\"];\n";
 		out << "If[Length[Eff" << tmpStr.str() << "]==0,Write[tt,\"" << order << " " << subOrder << " " << j << "\"];];\n";
 		out << "For[i = 1, i <= Length[Eff" << tmpStr.str() << "[[1]]], i++,\n";
 		out << "	 WriteString[tt,";
@@ -86,7 +77,13 @@ void define_term(std::ofstream &math_out, std::string &point, int type, int orde
 int _tmain(int argc, _TCHAR* argv[])
 {
 
-	std::ifstream conf("config.txt", std::ios::in);
+	//std::ifstream conf("config.txt", std::ios::in);
+
+
+	//std::string root_path;
+	const int J1 = 1;
+	std::vector<std::string> my_points;
+
 	std::string temp;
 
 	std::ofstream out;
@@ -97,51 +94,39 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::string MatrixStr;
 
 	int order, subOrder, cur_amount, cur_amount_nl, size, mode;
-	int amount, term_amount[10][3];//с запасом
+	int amountOfPoints, term_amount[10][3];//с запасом
 
-	getline(conf, temp);
-	getline(conf, root_path);
-	getline(conf, temp);
-	conf >> amount;
-	getline(conf, temp);
-	getline(conf, temp);
-	conf >> order;
-	getline(conf, temp);
-	getline(conf, temp);
-	conf >> mode;
-	getline(conf, temp);
-	getline(conf, temp);
+	configReader myConfigReader;
+	myConfigReader.openConfigFile("config.txt");
+	amountOfPoints = myConfigReader.readIntWithHeader();
+	order= myConfigReader.readIntWithHeader();
+	mode= myConfigReader.readIntWithHeader();
+	myConfigReader.closeConfig();
 
-	for (int i = 1; i <= order; i++)
-	{
-		conf >> subOrder >> term_amount[i][0] >> term_amount[i][1] >> term_amount[i][2];
-	}
-	conf.close();
+	myConfigReader.openConfigFile(fileNamePrinter::getPathToConfigFile());
+	myConfigReader.readRouteAmounts(term_amount,1,order);
+	myConfigReader.closeConfig();
 
+	myConfigReader.openPointsFile("points.txt");
+	myConfigReader.readPoints(my_points);
+	myConfigReader.closePointsFile();
 
-	std::ifstream my_points_f("points.txt", std::ios::in);
-	for (int jj = 1; jj <= amount; jj++)
-	{
-		getline(my_points_f, temp);
-		my_points.push_back(temp);
-	}
-	my_points_f.close();
-
-	int Total = 0;
-	std::ofstream out_sys;
+	
+	int total = 0;
+	std::ofstream outSystem;
 
 	//ƒќƒ≈Ћј“№!!!!!!!!!!!!!!!!!!!
 	//пока просо копирует файлы, в идеале должно записывать разные файлы в один
 
 	int step = 50;//количество слагаемых через которое надо начинать новый файл
-	for (int jj = 0; jj<amount; jj++)//перебираем все точки
+	for (int jj = 0; jj<amountOfPoints; jj++)//перебираем все точки
 	{
-		fname.str("");
-		fname << res << delim << my_points[jj] << delim << order << "_" << my_points[jj] << "general_math.txt";
-		math_out.open(fname.str(), std::ios::out);
-		fname.str("");
-		fname << sys << delim << order + 1<< "var_sys" << ".txt";
-		std::ifstream sysIn(fname.str(), std::ios::in);
+		
+		math_out.open(fileNamePrinter::getPathToMainMathematicaFiles(my_points[jj],order), std::ios::out);
+		
+		
+		std::ifstream sysIn(fileNamePrinter::getPathToSystems(order+1), std::ios::in);
+		
 		while (!sysIn.eof())
 		{
 			getline(sysIn, temp);
@@ -149,28 +134,26 @@ int _tmain(int argc, _TCHAR* argv[])
 				math_out << temp << "\n";
 		}
 		sysIn.close();
+		
 		if (mode == 1)//full mode
 			subOrder = 1;
 		else
 			subOrder = order;
 		for (; subOrder <= order; subOrder++)
 		{
-			Total = 0;
+			total = 0;
 			if (subOrder<6)
 				step = 50;
 			else if (subOrder >= 6)
 				step = 20;
-			//else
-			//	step=5;
-			fname.str("");
-			fname << res << delim << my_points[jj] << delim << "!_" << subOrder << "_results_J2=" << my_points[jj] << "(" << Total / step << ").txt";
+			
 			//добавл€ем в авто файл
 
-			math_out << "nb1= NotebookOpen[StringJoin[{NotebookDirectory[], \"!_" << subOrder << "_results_J2=" << my_points[jj] << "(" << Total / step << ").txt" << "\"}]];\n";
+			math_out << "nb1= NotebookOpen[StringJoin[{NotebookDirectory[], \""<< fileNamePrinter::getFileNameOfMathematicaFile(subOrder,my_points[jj], total / step)<< "\"}]];\n";
 			math_out << "NotebookEvaluate[nb1];\n";
 			math_out << "NotebookClose[nb1];\n";
 			//конец добавки
-			out.open(fname.str(), std::ios::out);
+			out.open(fileNamePrinter::getPathToMathematicaFiles(subOrder, my_points[jj], total / step), std::ios::out);
 
 
 			for (int i = 1; i <= subOrder; i++)
@@ -178,17 +161,17 @@ int _tmain(int argc, _TCHAR* argv[])
 				std::cout << my_points[jj] << " " << i << " type 0\n";
 				if ((i == 1 && subOrder == 1) || (i>1)) //слагаемые с одним оператором возмущени€ есть только в первом пор€дке
 				{
-					define_term(math_out, my_points[jj], 0, subOrder, i, Total, out, term_amount, step);
+					define_term(math_out, my_points[jj], 0, subOrder, i, total, out, term_amount, step);
 				}
 
-				//все тоже самое, только дл€  матриц типа 1
+				//все тоже самое, только дл€  матриц type1
 				std::cout << my_points[jj] << " " << i << " type 1\n";
-				define_term(math_out, my_points[jj], 1, subOrder, i, Total, out, term_amount, step);
+				define_term(math_out, my_points[jj], 1, subOrder, i, total, out, term_amount, step);
 
 
-				//все тоже самое, только дл€ n_single матриц
+				//все тоже самое, только дл€  матриц type2
 				std::cout << my_points[jj] << " " << i << " type 2\n";
-				define_term(math_out, my_points[jj], 2, subOrder, i, Total, out, term_amount, step);
+				define_term(math_out, my_points[jj], 2, subOrder, i, total, out, term_amount, step);
 
 
 			}

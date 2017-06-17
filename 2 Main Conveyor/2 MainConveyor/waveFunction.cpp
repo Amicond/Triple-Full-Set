@@ -119,6 +119,24 @@ void WaveFunction::addEigenState(State newEigenstate)
 		eigenStates.push_back(newEigenstate);
 }
 
+void WaveFunction::copyJPowers(const WaveFunction &wf)
+{
+	for (int i = 0; i < JFactors::Npowers; i++)
+	{
+		Jpower[i] = wf.Jpower[i];
+	}
+}
+
+void WaveFunction::incJPower(int num)
+{
+	Jpower[num]++;
+}
+
+int WaveFunction::getJPower(int num) const
+{
+	return Jpower[num];
+}
+
 void WaveFunction::clear(int nodeNumVal)
 {
 	nodesAmount = nodeNumVal;

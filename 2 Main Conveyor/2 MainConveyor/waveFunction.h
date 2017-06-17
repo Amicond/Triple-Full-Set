@@ -22,6 +22,9 @@ public:
 	unsigned int getEigenstatesAmount()const;
 	const State& WaveFunction::getEigenstateByNumber(int stateNumber)const;
 	void addEigenState(State newEigenstate);
+	void copyJPowers(const WaveFunction &wf);
+	void incJPower(int num);
+	int getJPower(int num) const;
 
 	int findLastGroup(int startNumber);
 	void clear(int nodeNumVal);
