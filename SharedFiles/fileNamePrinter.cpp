@@ -105,7 +105,7 @@ std::string fileNamePrinter::getPathToMathematicaFiles(int order, std::string po
 std::string fileNamePrinter::getPathToMainMathematicaFiles(std::string pointName,int order)
 {
 	std::ostringstream ostr;
-	ostr << DirForResultsFromStage3 << DirForSolutionsOnStage3 << Delimiter << pointName << Delimiter << order << "_" << pointName << "general_math.txt";
+	ostr << DirForResultsFromStage3 << DirForSystemsOnStage3 << Delimiter << pointName << Delimiter << order << "_" << pointName << "general_math.txt";
 	return ostr.str();
 }
 

@@ -43,6 +43,7 @@ int terminateWithError(bool silentMode,int code,std::string message,std::ofstrea
 int main(int argc, char* argv[])
 {
 	
+	
 	std::ofstream logfile(fileNameLog, std::ios::out);
 	//std::ifstream config("config.txt", std::ios::in);//хранит текущий порядок и кол-во маршрутов всех длин, начиная с 2
 	std::ifstream terms;//слагаемые ряда теории возмущений
@@ -93,6 +94,7 @@ int main(int argc, char* argv[])
 	MatrixOfResults fullMatrix;
 	int realSize;
 
+	int testMode;
 	//Read num of first and the last route.
 	confReader.openConfigFile(fileNameRouteNums);
 	type = confReader.readIntWithHeader();
@@ -100,14 +102,19 @@ int main(int argc, char* argv[])
 	subOrder = confReader.readNextInt();
 	startRouteNum = confReader.readIntWithHeader();
 	finRouteNum = confReader.readNextInt();
+	testMode = confReader.readIntWithHeader();
 	confReader.closeConfig();
 
-	
+	//test 
+	if (testMode)
+	{
+		std::cout << "Type: " << type << "\n";
+		std::cout << "Route nums: " << startRouteNum << " " << finRouteNum;
+	}
+	//end test
 	
 	confReader.openConfigFile(fileNamePrinter::getPathToConfigFile());
 	
-
-
 	///Error checking
 	if (3 * (N)*(int)pow((double)2, N - 1)>Namount)
 		terminateWithError(silentMode, 1, "Change Namount", logfile);
@@ -126,6 +133,11 @@ int main(int argc, char* argv[])
 	confReader.readRouteAmounts(routesAmount, 1, N);
 	confReader.closeConfig();
 
+	if (testMode)
+	{
+		std::cout << "1.2 RoutesAmount: "<<routesAmount[1][2] << "\n";
+	}
+
 	//Init of arrays for numbers of procedure, and powers of denominators in perturbation series
 	procedureOrder = new int[order];
 	powerOrder = new int[order];
@@ -141,6 +153,7 @@ int main(int argc, char* argv[])
 	}
 	else//для всех остальных
 	{
+		//std::string ttt = fileNamePrinter::getPathToPerturbationTerms(order);
 		terms.open(fileNamePrinter::getPathToPerturbationTerms(order), std::ios::in);
 		while (!terms.eof())
 		{
@@ -157,6 +170,11 @@ int main(int argc, char* argv[])
 	}
 	
 	mainTransformer.vOperator.readMatrixAndEnergie();
+
+	if (testMode)
+	{
+		std::cout << "E0 for 2 nodes: " << mainTransformer.vOperator.getE0(2) << "\n";
+	}
 		
 	//Initializing input and output arrays of WF
 	vecAmount = 3 * (order + 1)*(int)pow((double)2, order);
@@ -353,7 +371,11 @@ int main(int argc, char* argv[])
 						
 			//печать матрицы
 			//temp test
-			std::string tmpStr = fileNamePrinter::getPathToResMatrixFiles(strType, order, i, j);
+			if (testMode)
+			{
+				std::string tmpStr = fileNamePrinter::getPathToResMatrixFiles(strType, order, i, j);
+				std::cout << "Output filename:" << tmpStr;
+			}
 			//end test
 			fullMatrix.printMatrix(fileNamePrinter::getPathToResMatrixFiles(strType, order, i, j),order);
 			operatorsset.close();

@@ -17,7 +17,7 @@ const std::string MathDelimiter = "\\\\";
 
 
 //directories for result files from different stages
-const std::string ProjectFolder="d:\\Andrew\\Practice\\!!!_4 Triplet Square set";
+const std::string ProjectFolder="..\\..";
 const std::string ResultsFolder = ProjectFolder+ Delimiter +"Results"+ Delimiter;
 const std::string InputDataFolder = ProjectFolder + Delimiter + "InputData" + Delimiter;
 

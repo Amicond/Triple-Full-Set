@@ -122,10 +122,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (int jj = 0; jj<amountOfPoints; jj++)//перебираем все точки
 	{
 		
+		//temp
+		std::string temp;
+		temp = fileNamePrinter::getPathToMainMathematicaFiles(my_points[jj], order);
+
+		//end temp
 		math_out.open(fileNamePrinter::getPathToMainMathematicaFiles(my_points[jj],order), std::ios::out);
-		
-		
-		std::ifstream sysIn(fileNamePrinter::getPathToSystems(order+1), std::ios::in);
+	
+
+		std::ifstream sysIn(fileNamePrinter::getPathToSystems(order + 1), std::ios::in);
+
 		
 		while (!sysIn.eof())
 		{
@@ -153,6 +159,8 @@ int _tmain(int argc, _TCHAR* argv[])
 			math_out << "NotebookEvaluate[nb1];\n";
 			math_out << "NotebookClose[nb1];\n";
 			//конец добавки
+
+			
 			out.open(fileNamePrinter::getPathToMathematicaFiles(subOrder, my_points[jj], total / step), std::ios::out);
 
 
